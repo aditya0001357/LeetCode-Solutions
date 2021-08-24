@@ -1,0 +1,48 @@
+class Solution {
+public:
+    ListNode* oddEvenList(ListNode* head) 
+    {
+        ListNode *oddlist=NULL;
+        ListNode *evenlist=NULL;
+        
+        ListNode *oddhead;
+        ListNode *evenhead;
+        
+        if(head==NULL) return NULL;//case of no node
+        if(head->next==NULL)
+        {
+            ListNode *oddnode=new ListNode(head->val);
+            oddhead=oddnode;
+            return oddhead;
+        }
+        
+        while(head!=NULL)
+        {
+            ListNode *oddnode=new ListNode(head->val);//node created
+            if(oddlist==NULL)//1st node
+                oddhead=oddlist=oddnode;
+            else
+            {
+                oddlist->next=oddnode;//node added
+                oddlist=oddnode;//pointer points now to the current node
+            }
+            
+            head=head->next;
+            if(head==NULL) break;
+            
+            ListNode *evennode=new ListNode(head->val);
+            if(evenlist==NULL)
+                evenhead=evenlist=evennode;
+            else
+            {
+                evenlist->next=evennode;
+                evenlist=evennode;
+            }
+            
+            head=head->next;//we have possibilty of head=NULL
+        }
+        
+        oddlist->next=evenhead;
+        return oddhead;
+    }
+};

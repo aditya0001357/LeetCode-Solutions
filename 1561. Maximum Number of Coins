@@ -1,0 +1,19 @@
+class Solution{
+    public:int maxCoins(vector<int>& piles)
+    {
+        sort(piles.begin(), piles.end(), greater<int>());
+        int front=1;
+        int back=piles.size();
+        int sum=0;
+        
+        while(1)
+        {
+            sum=sum+piles[front];
+            front=front+2;
+            back--;
+            if(front>=back) 
+                break;
+        }
+        return sum;
+    }
+};

@@ -1,0 +1,51 @@
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head)
+    {
+        if(head==NULL)
+            return NULL;
+        int prev_val=200, flag=0;
+        ListNode *source,  *old, *temp=head;
+        
+        while(temp->next!=NULL)
+        {
+            if(prev_val==temp->val)
+            {
+                if(flag==0)//first occurence of repetion
+                {
+                    source=old;
+                    flag=1;
+                }
+            }
+            
+            else
+            {
+                prev_val=temp->val;
+                if(flag==1)//source node exists
+                {
+                    source->next=temp;
+                    flag=0;
+                }
+            }
+            old=temp;
+            temp=temp->next;
+        }
+        if(prev_val==temp->val)
+        {
+            if(flag==0)//first occurence of repetion
+            {
+                source=old;
+                source->next=NULL;
+                flag=1;
+            }
+            else
+                source->next=NULL;
+        }
+        else
+        {
+            if(flag==1)//sorce exists but its those elements ehich occur till the last
+                source->next=temp;
+        }
+        return head;
+    }
+};

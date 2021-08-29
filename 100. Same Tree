@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool value=true;//the default value of is true, and will change only by the method : 'traversal'
+    void traversal( TreeNode *a, TreeNode *b)
+    {
+        if(a==NULL && b!=NULL)//length of tree b is more than tree a and a's end has been reached
+        {
+            value=false;
+            return;
+        }
+        else if(b==NULL && a!=NULL))//length of tree a is more than tree b and b's end has been reached
+        {
+            value=false;
+            return;
+        }
+        else if(a==NULL && b==NULL)//won't cahage value of variable 'value'
+            return;
+        else
+        {
+            if(a->val!=b->val)
+            {
+                value=false;
+                return;
+            }
+            else
+            {
+                traversal(a->left, b->left);
+                traversal(a->right, b->right);
+            }       
+        }
+            
+    }
+    bool isSameTree(TreeNode* p, TreeNode* q) 
+    {
+        traversal(p,q);
+        return value;
+    }
+};
